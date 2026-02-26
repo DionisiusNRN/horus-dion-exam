@@ -26,12 +26,11 @@ export default function Login() {
     try {
       const res = await API.post("/users/login", form);
 
-      // simpan token (dummy dari backend)
       localStorage.setItem("token", res.data.token);
 
       navigate("/dashboard");
     } catch (err) {
-      setError("Username atau password salah");
+      setError(err.response?.data?.message || "Terjadi kesalahan saat login");
     }
   };
 

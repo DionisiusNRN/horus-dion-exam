@@ -46,9 +46,11 @@ class UserController extends Controller
             ], 401);
         }
 
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()->json([
             'message' => 'Login berhasil',
-            'token'   => base64_encode($user->id)
+            'token'   => $token
         ]);
     }
 
